@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Teleprompter</string>
     <string name="action_settings">Settings</string>
+    <string name="title">title</string>
+    <string name="scenario">scenario</string>
+    <string name="projects_title">Projects</string>
+    <string name="btn_normal_speed">Normal</string>
+    <string name="btnStop_stop">Stop</string>
+    <string name="project_title">TITLE</string>
+    <string name="project_scenario">SCENARIO</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_slower">Slower</string>
+    <string name="btn_faster">Faster</string>
     <string name="message_no_permissions">The app cannot work without permissions</string>
     <string name="label_ok">OK</string>
 

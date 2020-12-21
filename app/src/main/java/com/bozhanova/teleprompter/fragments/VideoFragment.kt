@@ -20,6 +20,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bozhanova.teleprompter.R
 import com.bozhanova.teleprompter.utils.*
+import kotlinx.android.synthetic.main.fragment_camera.*
+import kotlinx.android.synthetic.main.fragment_video.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -105,6 +107,11 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         view.setOnTouchListener { _, motionEvent ->
             if (gestureDetectorCompat.onTouchEvent(motionEvent)) return@setOnTouchListener false
             return@setOnTouchListener true
+        }
+        val bundle = this.arguments
+        if (bundle != null) {
+            val receivedScenario = bundle.getString("project_scenario", "")// Key, default value
+            textV_scenario2.text = receivedScenario
         }
     }
 

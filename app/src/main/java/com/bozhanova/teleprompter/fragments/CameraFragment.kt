@@ -21,6 +21,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bozhanova.teleprompter.analyzer.LuminosityAnalyzer
 import com.bozhanova.teleprompter.R
+import kotlinx.android.synthetic.main.activity_projectslist.*
+import kotlinx.android.synthetic.main.detail_project_fragment.*
+import kotlinx.android.synthetic.main.fragment_camera.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

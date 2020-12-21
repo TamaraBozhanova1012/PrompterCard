@@ -178,5 +178,19 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:constraint_referenced_ids="gridVertical1,gridVertical2,gridHorizontal1,gridHorizontal2" />
+
+        <TextView
+            android:id="@+id/textV_scenario2"
+            android:layout_width="228dp"
+            android:layout_height="82dp"
+            android:maxLines="30"
+            android:text="TextView"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.321"
+            app:layout_constraintStart_toStartOf="@+id/viewFinder"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.351" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

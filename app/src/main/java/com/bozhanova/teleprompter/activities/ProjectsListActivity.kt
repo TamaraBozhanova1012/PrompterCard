@@ -1,6 +1,5 @@
 package com.bozhanova.teleprompter.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,14 +7,9 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.bozhanova.teleprompter.MainActivity
 import com.bozhanova.teleprompter.R
-import com.bozhanova.teleprompter.fragments.CameraFragment
 import com.bozhanova.teleprompter.fragments.ProjectsFragment
-import com.bozhanova.teleprompter.fragments.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_projectslist.*
 
@@ -78,7 +72,6 @@ class ProjectsListActivity : AppCompatActivity(), ProjectsFragment.OnItemClicked
             projects_fab.hide();
             val bundle = bundleOf("project_scenario" to scenario)
             this.findNavController(R.id.fragmentNavHost).navigate(R.id.action_detail_projects_fragment_des_to_videoFragment, bundle)
-
         }
     }
     override fun onItemSelected(scenario : String) {

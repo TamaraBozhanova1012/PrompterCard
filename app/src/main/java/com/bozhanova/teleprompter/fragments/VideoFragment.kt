@@ -3,7 +3,6 @@ package com.bozhanova.teleprompter.fragments
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Configuration
 import android.hardware.display.DisplayManager
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +19,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bozhanova.teleprompter.R
 import com.bozhanova.teleprompter.utils.*
-import kotlinx.android.synthetic.main.fragment_camera.*
 import kotlinx.android.synthetic.main.fragment_video.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

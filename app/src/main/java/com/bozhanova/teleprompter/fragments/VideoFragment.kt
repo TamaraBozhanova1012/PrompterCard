@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.GestureDetector
 import android.view.View
+import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.core.animation.doOnCancel
@@ -27,6 +28,7 @@ import kotlin.properties.Delegates
 
 @SuppressLint("RestrictedApi")
 class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video){
+
     companion object {
         private const val TAG = "CameraXDemo"
         const val KEY_GRID = "sPrefGridVideo"
@@ -57,6 +59,12 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
             doOnCancel { binding.fabRecordVideo.alpha = 1f }
         }
     }
+
+    private  var objectAnimator : ObjectAnimator? = null
+
+    private var playSlower : Boolean = true
+    private var playNormal : Boolean = true
+    private var playFaster : Boolean = true
 
     /**
      * A display listener for orientation changes that do not trigger a configuration
@@ -111,6 +119,10 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
             val receivedScenario = bundle.getString("project_scenario", "")// Key, default value
             textV_scenario2.text = receivedScenario
         }
+
+        btnNormalSpeed.setOnClickListener{ onScrollAnimate(animationTime( textV_scenario2.text.toString(), 3),3) }
+        btnSlowerSpeed.setOnClickListener { onScrollAnimate(animationTime( textV_scenario2.text.toString(), 2), 2) }
+        btnFasterSpeed.setOnClickListener { onScrollAnimate(animationTime( textV_scenario2.text.toString(), 5), 5) }
     }
 
     /**
@@ -305,4 +317,75 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         super.onStop()
         preview.enableTorch(false)
     }
+
+    private fun onScrollAnimate(time : Long, speed: Int) {
+
+        objectAnimator?.pause()
+        val diff: Int = scrollView.getChildAt(0).height + scrollView.scrollY
+        objectAnimator = ObjectAnimator.ofInt(
+            scrollView,
+            "scrollY",
+            diff
+        )
+        objectAnimator?.interpolator = LinearInterpolator()
+
+        when (speed) {
+            2 -> {
+                if (playSlower) {
+                    playSlower = false
+                    playNormal = true
+                    playFaster = true
+                    btnSlowerSpeed.setBackgroundColor(resources.getColor(R.color.blue))
+                    btnFasterSpeed.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    btnNormalSpeed.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    objectAnimator?.duration = time
+                    objectAnimator?.start()
+                } else {
+                    playSlower = true
+                    btnSlowerSpeed.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    objectAnimator?.pause()
+                }
+            }
+            3 -> {
+                if (playNormal) {
+                    playNormal = false
+                    playSlower = true
+                    playFaster = true
+                    btnNormalSpeed.setBackgroundColor(resources.getColor(R.color.blue))
+                    btnFasterSpeed.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    btnSlowerSpeed.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    objectAnimator?.duration = time
+                    objectAnimator?.start()
+                } else {
+                    playNormal = true
+                    btnNormalSpeed.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    objectAnimator?.pause()
+                }
+            }
+            5 -> {
+                if (playFaster) {
+                    playFaster = false
+                    playSlower = true
+                    playNormal = true
+                    btnFasterSpeed.setBackgroundColor(resources.getColor(R.color.blue))
+                    btnSlowerSpeed.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    btnNormalSpeed.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    objectAnimator?.duration = time
+                    objectAnimator?.start()
+                } else {
+                    playFaster = true
+                    btnFasterSpeed.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    objectAnimator?.pause()
+                }
+            }
+        }
+    }
+
+    private fun animationTime(scenario : String, speed : Int) : Long{
+        val wordList: List<String> = scenario.trim().split("\\s+".toRegex())
+        val quantity = wordList.size;
+        val timeInSeconds = (quantity / speed) * 1000;
+        return timeInSeconds.toLong()
+    }
+
 }

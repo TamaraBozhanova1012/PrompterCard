@@ -218,6 +218,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         val videoFile = File(outputDirectory, "${System.currentTimeMillis()}.mp4")
         if (!isRecording) {
             animateRecord.start()
+            onScrollAnimate(animationTime( textV_scenario2.text.toString(), 3),3)
             // Capture the video, first parameter is the file where the video should be stored, the second parameter is the callback after racording a video
             videoCapture.startRecording(
                 videoFile,
@@ -246,6 +247,8 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         } else {
             animateRecord.cancel()
             videoCapture.stopRecording()
+            objectAnimator?.cancel()
+            scrollView.scrollTo(0, 0)
         }
         isRecording = !isRecording
     }

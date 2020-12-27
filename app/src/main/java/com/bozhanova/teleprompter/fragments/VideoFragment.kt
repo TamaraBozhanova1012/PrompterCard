@@ -12,8 +12,11 @@ import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.core.animation.doOnCancel
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bozhanova.teleprompter.databinding.FragmentVideoBinding
 import com.bozhanova.teleprompter.utils.SharedPrefsManager
 import com.bumptech.glide.Glide
@@ -65,6 +68,8 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
     private var playSlower : Boolean = true
     private var playNormal : Boolean = true
     private var playFaster : Boolean = true
+
+    var listener: OnBackNavigationListener? = null
 
     /**
      * A display listener for orientation changes that do not trigger a configuration
@@ -314,7 +319,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         }
     }
 
-    override fun onBackPressed() = requireActivity().finish()
+    //override fun onBackPressed() = requireActivity().finish()
 
     override fun onStop() {
         super.onStop()
@@ -389,6 +394,24 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         val quantity = wordList.size;
         val timeInSeconds = (quantity / speed) * 1000;
         return timeInSeconds.toLong()
+    }
+
+    override fun onBackPressed() {
+        view?.let {
+            Navigation.findNavController(it).popBackStack()}
+        listener?.onBackNavigate()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as? OnBackNavigationListener
+        if (listener == null) {
+            return
+        }
+    }
+
+    interface OnBackNavigationListener {
+        fun onBackNavigate()
     }
 
 }

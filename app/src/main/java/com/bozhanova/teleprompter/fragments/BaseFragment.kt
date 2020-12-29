@@ -1,6 +1,7 @@
 package com.bozhanova.teleprompter.fragments
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
@@ -52,14 +53,24 @@ abstract class BaseFragment<B : ViewDataBinding>(private val fragmentLayout: Int
         })
 
         // Init the output folder
-        outputDirectory = File(
-            requireContext().getExternalFilesDir(Environment.DIRECTORY_DCIM)?.absolutePath
-                ?: requireContext().externalMediaDirs.first().absolutePath
-        )
 
         // Create a binding instance
         binding = DataBindingUtil.inflate(inflater, fragmentLayout, container, false)
         return binding.root
+
+    }
+
+   override fun onAttach(context: Context) {
+        super.onAttach(context)
+        outputDirectory = getOutputDirectory(context)
+    }
+
+    private fun getOutputDirectory(context: Context): File {
+        val appContext = context.applicationContext
+        val mediaDir = context.externalMediaDirs.firstOrNull()?.let {
+            File(it, appContext.resources.getString(R.string.app_name)).apply { mkdirs() }
+        }
+        return if (mediaDir != null && mediaDir.exists())mediaDir else appContext.filesDir
     }
 
     override fun onResume() {

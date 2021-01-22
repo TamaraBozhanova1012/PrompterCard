@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
+        android:id="@+id/clVideo"
         tools:context=".fragments.VideoFragment">
 
         <TextureView
@@ -23,8 +24,10 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <View
             android:layout_width="0dp"
@@ -46,7 +49,7 @@
             app:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/buttonGallery"
@@ -201,14 +204,17 @@
             app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.142">
+            app:layout_constraintVertical_bias="0.142"
+            >
 
-            <ScrollView
+            <com.bozhanova.teleprompter.MyMouseScroll
                 android:id="@+id/scrollView"
-                android:scrollbars="none"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:scrollbars="none"
+
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -219,8 +225,8 @@
                         android:id="@+id/textV_scenario2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
                         android:lineSpacingMultiplier="2"
+                        android:textColor="@color/colorWhite"
                         android:textSize="21sp" />
 
                     <LinearLayout
@@ -229,7 +235,7 @@
                         android:orientation="vertical" />
 
                 </LinearLayout>
-            </ScrollView>
+            </com.bozhanova.teleprompter.MyMouseScroll>
         </LinearLayout>
 
         <Button
@@ -243,6 +249,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             app:layout_constraintVertical_bias="1.0" />
+
         <Button
             android:id="@+id/btnSlowerSpeed"
             android:layout_width="wrap_content"

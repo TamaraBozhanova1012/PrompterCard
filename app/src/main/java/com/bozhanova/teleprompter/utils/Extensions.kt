@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.view.*
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
@@ -100,6 +101,10 @@ fun Fragment.share(file: File, title: String = "Share with...") {
     share.type = "image/*"
     share.putExtra(Intent.EXTRA_STREAM, Uri.parse(file.absolutePath))
     startActivity(Intent.createChooser(share, title))
+}
+
+fun Fragment.showToast(title: String){
+    Toast.makeText(this.context,title,Toast.LENGTH_SHORT).show()
 }
 
 fun ViewPager2.onPageSelected(action: (Int) -> Unit) {

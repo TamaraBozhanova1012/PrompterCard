@@ -109,4 +109,5 @@ abstract class BaseFragment<B : ViewDataBinding>(private val fragmentLayout: Int
     open fun onPermissionGranted() = Unit // a function which will be called after the permission check
 
     abstract fun onBackPressed() // an abstract function which will be called on the Back button press
+
 }

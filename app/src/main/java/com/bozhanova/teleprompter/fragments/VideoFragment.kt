@@ -4,13 +4,16 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.display.DisplayManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.camera.core.*
 import androidx.core.animation.doOnCancel
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.bozhanova.teleprompter.R
@@ -27,7 +30,8 @@ import java.io.File
 import kotlin.properties.Delegates
 
 @SuppressLint("RestrictedApi")
-class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video) , View.OnTouchListener{
+class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video),
+    View.OnTouchListener {
 
     companion object {
         private const val TAG = "CameraXDemo"
@@ -39,7 +43,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
     private lateinit var prefs: SharedPrefsManager
     private lateinit var preview: Preview
     private lateinit var videoCapture: VideoCapture
-    private var textSpeed : Long = 0
+    private var textSpeed: Long = 0
     private var displayId = -1
     private var lensFacing = CameraX.LensFacing.BACK
     private var flashMode by Delegates.observable(FlashMode.OFF.ordinal) { _, _, new ->
@@ -61,10 +65,10 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         }
     }
 
-    private  var objectAnimator : ObjectAnimator? = null
-    private var playSlower : Boolean = true
-    private var playNormal : Boolean = true
-    private var playFaster : Boolean = true
+    private var objectAnimator: ObjectAnimator? = null
+    private var playSlower: Boolean = true
+    private var playNormal: Boolean = true
+    private var playFaster: Boolean = true
 
     var listener: OnBackNavigationListener? = null
 
@@ -85,8 +89,10 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         } ?: Unit
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        speedScrollView.isVisible = false
         prefs = SharedPrefsManager.newInstance(requireContext())
         hasGrid = prefs.getBoolean(KEY_GRID, false)
         initViews()
@@ -123,35 +129,70 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
             textV_scenario2.text = receivedScenario
         }
         //scrollView.method = Runnable {onScrollAnimate(scrollView.time,-1)}
-        btnNormalSpeed.setOnClickListener{ onScrollAnimate(animationTime( textV_scenario2.text.toString(), 3),3) }
-        btnSlowerSpeed.setOnClickListener { onScrollAnimate(animationTime( textV_scenario2.text.toString(), 2), 2) }
-        btnFasterSpeed.setOnClickListener { onScrollAnimate(animationTime( textV_scenario2.text.toString(), 5), 5) }
+        btnNormalSpeed.setOnClickListener {
+            onScrollAnimate(
+                animationTime(
+                    textV_scenario2.text.toString(),
+                    3
+                ), 3
+            )
+        }
+        btnSlowerSpeed.setOnClickListener {
+            onScrollAnimate(
+                animationTime(
+                    textV_scenario2.text.toString(),
+                    2
+                ), 2
+            )
+        }
+        btnFasterSpeed.setOnClickListener {
+            onScrollAnimate(
+                animationTime(
+                    textV_scenario2.text.toString(),
+                    5
+                ), 5
+            )
+        }
         scrollView.isActivated = false
-        viewFinder.setOnTouchListener(this)
+        speedScrollView.setOnTouchListener(this)
+        speedScrollView.setOnScrollChangeListener { view, i, i2, i3, i4 ->
+            onScrollAnimate((i4.toLong() - i2) * 200, -1)
+        }
+        speedScrollView.isNestedScrollingEnabled = true
+        speedScrollView.setOnClickListener {
+            showToast("onClickListener")
+        }
     }
-    var scrolled : Long =0
 
-    var neededScroll : Boolean = false
-    var lastY : Float = 0f
+    var scrolled: Long = 0
+
+    var neededScroll: Boolean = false
+    var lastY: Float = 0f
 
     override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
         if (p0?.layerType != viewFinder.layerType) return false
 
-        when(p1?.actionMasked) {
+        when (p1?.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 lastY = p1.y
+                showToast("ACTION_DOWN")
             }
             MotionEvent.ACTION_MOVE -> {
                 neededScroll = true
-
+                showToast("ACTION_MOVE")
             }
             MotionEvent.ACTION_UP -> {
                 if (neededScroll) {
                     neededScroll = false
                     val a = lastY - p1.y
-                    onScrollAnimate(a.toLong() * 100, -1)
+                    onScrollAnimate(a.toLong() * 500, -1)
                 }
+                showToast("ACTION_UP")
             }
+            MotionEvent.AXIS_VSCROLL -> showToast("AXIS_VSCROLL")
+            MotionEvent.AXIS_SCROLL -> showToast("AXIS_SCROLL")
+            MotionEvent.ACTION_SCROLL -> showToast("ACTION_SCROLL")
+            MotionEvent.AXIS_HSCROLL -> showToast("AXIS_HSCROLL")
         }
         return true
     }
@@ -163,7 +204,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         binding.buttonGrid.setImageResource(if (hasGrid) R.drawable.ic_grid_on else R.drawable.ic_grid_off)
         binding.groupGridLines.visibility = if (hasGrid) View.VISIBLE else View.GONE
 
-       // adjustInsets()
+        // adjustInsets()
     }
 
     /**
@@ -246,10 +287,11 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
 
     private fun recordVideo(videoCapture: VideoCapture) {
         // Create the output file
+        changeVisibility()
         val videoFile = File(outputDirectory, "${System.currentTimeMillis()}.mp4")
         if (!isRecording) {
             animateRecord.start()
-            onScrollAnimate(animationTime( textV_scenario2.text.toString(), 2),2)
+            onScrollAnimate(animationTime(textV_scenario2.text.toString(), 2), 2)
             // Capture the video, first parameter is the file where the video should be stored, the second parameter is the callback after racording a video
             videoCapture.startRecording(
                 videoFile,
@@ -282,6 +324,30 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
             scrollView.scrollTo(0, 0)
         }
         isRecording = !isRecording
+    }
+
+    fun changeVisibility() {
+        if (!isRecording) {
+            buttonGallery.isVisible = false
+            buttonSwitchCamera.isVisible = false
+            buttonFlash.isVisible = false
+            buttonGrid.isVisible = false
+            imageBack.isVisible = false
+            btnFasterSpeed.isVisible = false
+            btnNormalSpeed.isVisible = false
+            btnSlowerSpeed.isVisible = false
+            speedScrollView.isVisible = true
+        } else {
+            buttonGallery.isVisible = true
+            buttonSwitchCamera.isVisible = true
+            buttonFlash.isVisible = true
+            buttonGrid.isVisible = true
+            imageBack.isVisible = true
+            btnFasterSpeed.isVisible = true
+            btnNormalSpeed.isVisible = true
+            btnSlowerSpeed.isVisible = true
+            speedScrollView.isVisible = false
+        }
     }
 
     /**
@@ -351,8 +417,9 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         super.onStop()
         preview.enableTorch(false)
     }
-    var  speed1 : Int =0;
-    public fun onScrollAnimate(time : Long, speed: Int) {
+
+    var speed1: Int = 0;
+    public fun onScrollAnimate(time: Long, speed: Int) {
 
         objectAnimator?.pause()
         val diff: Int = scrollView.getChildAt(0).height + scrollView.scrollY
@@ -413,33 +480,34 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
                     objectAnimator?.pause()
                 }
             }
-            -1 ->{
-                if(textSpeed in -time..Long.MAX_VALUE){
-                textSpeed += time
+            -1 -> {
+                if (textSpeed in -time..Long.MAX_VALUE) {
+                    textSpeed += time
                 }
                 objectAnimator?.duration = textSpeed
                 objectAnimator?.start()
             }
 
         }
-        if(speed!=-1){
+        if (speed != -1) {
             speed1 = speed
         }
 
     }
 
-    private fun animationTime(scenario : String, speed : Int) : Long{
+    private fun animationTime(scenario: String, speed: Int): Long {
         val wordList: List<String> = scenario.trim().split("\\s+".toRegex())
         val quantity = wordList.size;
         val timeInSeconds = (quantity / speed) * 1000;
         textSpeed = timeInSeconds.toLong()
         return textSpeed
     }
-   
+
 
     override fun onBackPressed() {
         view?.let {
-            Navigation.findNavController(it).popBackStack()}
+            Navigation.findNavController(it).popBackStack()
+        }
         listener?.onBackNavigate()
     }
 

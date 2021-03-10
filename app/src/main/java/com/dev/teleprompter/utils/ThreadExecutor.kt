@@ -1,4 +1,4 @@
-package com.bozhanova.teleprompter.utils
+package com.dev.teleprompter.utils
 
 import android.os.Handler
 import java.util.concurrent.Executor

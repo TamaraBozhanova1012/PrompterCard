@@ -1,11 +1,9 @@
-package com.bozhanova.teleprompter
+package com.dev.teleprompter
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
-import com.bozhanova.teleprompter.activities.ProjectsListActivity
+import com.dev.teleprompter.activities.ProjectsListActivity
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 class SplashScreenActivity: AppCompatActivity() {

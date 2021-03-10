@@ -1,4 +1,4 @@
-package com.bozhanova.teleprompter.utils
+package com.dev.teleprompter.utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

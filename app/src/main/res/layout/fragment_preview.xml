@@ -6,7 +6,7 @@
     <data>
         <variable
             name="fragment"
-            type="com.bozhanova.teleprompter.fragments.PreviewFragment"/>
+            type="com.dev.teleprompter.fragments.PreviewFragment"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

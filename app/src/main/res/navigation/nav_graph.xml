@@ -5,7 +5,7 @@
     app:startDestination="@id/projects_fragment_des">
     <fragment
         android:id="@+id/projects_fragment_des"
-        android:name="com.bozhanova.teleprompter.fragments.ProjectsFragment"
+        android:name="com.dev.teleprompter.fragments.ProjectsFragment"
         android:label="projects_fragment"
         tools:layout="@layout/projects_fragment" >
         <action
@@ -14,14 +14,14 @@
     </fragment>
     <fragment
         android:id="@+id/settings_fragment_des"
-        android:name="com.bozhanova.teleprompter.fragments.SettingsFragment"
+        android:name="com.dev.teleprompter.fragments.SettingsFragment"
         android:label="settings_fragment"
         tools:layout="@layout/settings_fragment" />
     <navigation android:id="@+id/navigation4"
         app:startDestination="@id/detail_projects_fragment_des">
         <fragment
             android:id="@+id/detail_projects_fragment_des"
-            android:name="com.bozhanova.teleprompter.fragments.DetailProjectFragment"
+            android:name="com.dev.teleprompter.fragments.DetailProjectFragment"
             android:label="detail_project_fragment"
             tools:layout="@layout/detail_project_fragment" >
             <action
@@ -30,7 +30,7 @@
         </fragment>
         <fragment
             android:id="@+id/cameraFragment"
-            android:name="com.bozhanova.teleprompter.fragments.CameraFragment"
+            android:name="com.dev.teleprompter.fragments.CameraFragment"
             android:label="fragment_camera"
             tools:layout="@layout/fragment_camera" >
             <action
@@ -54,12 +54,12 @@
         </fragment>
         <fragment
             android:id="@+id/previewFragment"
-            android:name="com.bozhanova.teleprompter.fragments.PreviewFragment"
+            android:name="com.dev.teleprompter.fragments.PreviewFragment"
             android:label="fragment_preview"
             tools:layout="@layout/fragment_preview" />
         <fragment
             android:id="@+id/videoFragment"
-            android:name="com.bozhanova.teleprompter.fragments.VideoFragment"
+            android:name="com.dev.teleprompter.fragments.VideoFragment"
             android:label="fragment_video"
             tools:layout="@layout/fragment_video" >
             <action

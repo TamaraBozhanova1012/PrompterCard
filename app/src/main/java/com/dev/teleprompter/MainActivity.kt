@@ -1,4 +1,4 @@
-package com.bozhanova.teleprompter
+package com.dev.teleprompter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +8,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-    }
-
-    companion object {
-        internal const val SCROLL_FUCK :String = "com.bozhanova.acton.ONSCROLL"
     }
 }

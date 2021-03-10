@@ -1,16 +1,14 @@
-package com.bozhanova.teleprompter.activities
+package com.dev.teleprompter.activities
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.core.view.isGone
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.bozhanova.teleprompter.R
-import com.bozhanova.teleprompter.fragments.ProjectsFragment
-import com.bozhanova.teleprompter.fragments.VideoFragment
+import com.dev.teleprompter.R
+import com.dev.teleprompter.fragments.ProjectsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_projectslist.*
 

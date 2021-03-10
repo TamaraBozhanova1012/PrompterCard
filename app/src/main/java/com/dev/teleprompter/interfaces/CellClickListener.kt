@@ -1,6 +1,6 @@
-package com.bozhanova.teleprompter.interfaces
+package com.dev.teleprompter.interfaces
 
-import com.bozhanova.teleprompter.models.Project
+import com.dev.teleprompter.models.Project
 
 interface CellClickListener {
     fun onItemClicked(data: Project)

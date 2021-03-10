@@ -1,12 +1,12 @@
-package com.bozhanova.teleprompter.adapter
+package com.dev.teleprompter.adapter
 
 import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bozhanova.teleprompter.R
-import com.bozhanova.teleprompter.utils.layoutInflater
+import com.dev.teleprompter.R
+import com.dev.teleprompter.utils.layoutInflater
 import com.bumptech.glide.Glide
 import java.io.File
 

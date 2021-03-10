@@ -1,4 +1,4 @@
-package com.bozhanova.teleprompter.analyzer
+package com.dev.teleprompter.analyzer
 
 import android.util.Log
 import androidx.camera.core.ImageAnalysis

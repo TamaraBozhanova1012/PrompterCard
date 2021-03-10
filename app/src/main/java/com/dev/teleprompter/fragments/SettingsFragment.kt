@@ -1,11 +1,11 @@
-package com.bozhanova.teleprompter.fragments
+package com.dev.teleprompter.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bozhanova.teleprompter.R
+import com.dev.teleprompter.R
 
 class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

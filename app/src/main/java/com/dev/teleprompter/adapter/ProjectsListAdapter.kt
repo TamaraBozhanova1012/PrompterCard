@@ -1,12 +1,12 @@
-package com.bozhanova.teleprompter.adapter
+package com.dev.teleprompter.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bozhanova.teleprompter.R
-import com.bozhanova.teleprompter.interfaces.CellClickListener
-import com.bozhanova.teleprompter.models.Project
+import com.dev.teleprompter.R
+import com.dev.teleprompter.interfaces.CellClickListener
+import com.dev.teleprompter.models.Project
 
 class ProjectsListAdapter (private val myDataSet: List<Project>,
                            private val cellClickListener: CellClickListener

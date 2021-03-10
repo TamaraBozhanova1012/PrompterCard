@@ -273,7 +273,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="21sp"
                 android:textColor="@color/transparent"
-                android:text="@string/song_about_stepfather_maks"/>
+                android:text="@string/text_to_scroll"/>
         </ScrollView>
 
         <ImageButton

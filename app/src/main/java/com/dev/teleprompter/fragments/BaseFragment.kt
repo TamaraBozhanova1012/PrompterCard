@@ -1,10 +1,9 @@
-package com.bozhanova.teleprompter.fragments
+package com.dev.teleprompter.fragments
 
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.bozhanova.teleprompter.R
+import com.dev.teleprompter.R
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 

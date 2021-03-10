@@ -1,4 +1,4 @@
-package com.bozhanova.teleprompter.fragments
+package com.dev.teleprompter.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,13 +14,13 @@ import androidx.camera.core.*
 import androidx.camera.extensions.HdrImageCaptureExtender
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import com.bozhanova.teleprompter.databinding.FragmentCameraBinding
-import com.bozhanova.teleprompter.enums.CameraTimer
-import com.bozhanova.teleprompter.utils.*
+import com.dev.teleprompter.databinding.FragmentCameraBinding
+import com.dev.teleprompter.enums.CameraTimer
+import com.dev.teleprompter.utils.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bozhanova.teleprompter.analyzer.LuminosityAnalyzer
-import com.bozhanova.teleprompter.R
+import com.dev.teleprompter.analyzer.LuminosityAnalyzer
+import com.dev.teleprompter.R
 import kotlinx.android.synthetic.main.activity_projectslist.*
 import kotlinx.android.synthetic.main.detail_project_fragment.*
 import kotlinx.android.synthetic.main.fragment_camera.*

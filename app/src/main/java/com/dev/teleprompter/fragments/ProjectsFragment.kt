@@ -1,4 +1,4 @@
-package com.bozhanova.teleprompter.fragments
+package com.dev.teleprompter.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bozhanova.teleprompter.R
-import com.bozhanova.teleprompter.adapter.ProjectsListAdapter
-import com.bozhanova.teleprompter.interfaces.CellClickListener
-import com.bozhanova.teleprompter.models.Project
+import com.dev.teleprompter.R
+import com.dev.teleprompter.adapter.ProjectsListAdapter
+import com.dev.teleprompter.interfaces.CellClickListener
+import com.dev.teleprompter.models.Project
 import kotlinx.android.synthetic.main.projects_fragment.*
 
 class ProjectsFragment : Fragment(), CellClickListener {

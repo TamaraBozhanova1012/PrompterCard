@@ -1,14 +1,13 @@
-package com.bozhanova.teleprompter.fragments
+package com.dev.teleprompter.fragments
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.Navigation
-import com.bozhanova.teleprompter.databinding.FragmentPreviewBinding
-import com.bozhanova.teleprompter.R
-import com.bozhanova.teleprompter.adapter.PicturesAdapter
-import com.bozhanova.teleprompter.utils.onPageSelected
-import com.bozhanova.teleprompter.utils.*
+import com.dev.teleprompter.databinding.FragmentPreviewBinding
+import com.dev.teleprompter.R
+import com.dev.teleprompter.adapter.PicturesAdapter
+import com.dev.teleprompter.utils.*
 
 class PreviewFragment : BaseFragment<FragmentPreviewBinding>(R.layout.fragment_preview){
 

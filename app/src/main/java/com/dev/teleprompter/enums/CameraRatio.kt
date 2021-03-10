@@ -1,4 +1,4 @@
-package com.bozhanova.teleprompter.enums
+package com.dev.teleprompter.enums
 
 enum class CameraRatio {
     RATIO_1_1,

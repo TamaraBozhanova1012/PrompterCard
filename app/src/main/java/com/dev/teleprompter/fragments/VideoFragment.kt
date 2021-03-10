@@ -1,4 +1,4 @@
-package com.bozhanova.teleprompter.fragments
+package com.dev.teleprompter.fragments
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
@@ -16,9 +16,9 @@ import androidx.core.animation.doOnCancel
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import com.bozhanova.teleprompter.R
-import com.bozhanova.teleprompter.databinding.FragmentVideoBinding
-import com.bozhanova.teleprompter.utils.*
+import com.dev.teleprompter.R
+import com.dev.teleprompter.databinding.FragmentVideoBinding
+import com.dev.teleprompter.utils.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.*
@@ -159,9 +159,6 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
             onScrollAnimate((i4.toLong() - i2) * 200, -1)
         }
         speedScrollView.isNestedScrollingEnabled = true
-        speedScrollView.setOnClickListener {
-            showToast("onClickListener")
-        }
     }
 
     var scrolled: Long = 0
@@ -175,11 +172,9 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
         when (p1?.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 lastY = p1.y
-                showToast("ACTION_DOWN")
             }
             MotionEvent.ACTION_MOVE -> {
                 neededScroll = true
-                showToast("ACTION_MOVE")
             }
             MotionEvent.ACTION_UP -> {
                 if (neededScroll) {
@@ -187,12 +182,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(R.layout.fragment_video
                     val a = lastY - p1.y
                     onScrollAnimate(a.toLong() * 500, -1)
                 }
-                showToast("ACTION_UP")
             }
-            MotionEvent.AXIS_VSCROLL -> showToast("AXIS_VSCROLL")
-            MotionEvent.AXIS_SCROLL -> showToast("AXIS_SCROLL")
-            MotionEvent.ACTION_SCROLL -> showToast("ACTION_SCROLL")
-            MotionEvent.AXIS_HSCROLL -> showToast("AXIS_HSCROLL")
         }
         return true
     }
